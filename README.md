@@ -1,16 +1,68 @@
-# React + Vite
+# Quiz React App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and interactive quiz application built with React. The app fetches True/False questions from an external API, presents them one at a time with a countdown timer, and displays a detailed results page at the end.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Fetches quiz questions from an external API.
+- Welcome screen to start the quiz.
+- One question displayed at a time.
+- 30-second countdown timer for each question.
+- Automatic progression when time runs out.
+- Stores user answers using React Context.
+- Results page with:
+  - Total score
+  - Pass/fail status
+  - Detailed answer summary
+- "Play Again" option to restart the quiz.
+- Client-side routing using React Router.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- React
+- React Router
+- Context API
+- JavaScript (ES6+)
+- CSS
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📂 Project Structure
+
+```text
+quiz-reactApp/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── WelcomePage.jsx
+│   │   ├── QuizPage.jsx
+│   │   └── ResultsPage.jsx
+│   ├── context/
+│   │   └── QuizContext.jsx
+│   ├── services/
+│   │   └── quizService.js
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.jsx
+├── package.json
+└── README.md
+
+## 📦 Installation
+
+Follow these steps to set up and run the project locally.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/YoungMonero/quiz-reactApp.git
+
+cd contact-maneger/quiz-reactApp
+
+npm install
+
+npm run dev
+
+http://localhost:5173
