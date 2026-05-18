@@ -1,34 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react"
+import { BrowserRouter as Router, Route, Routes } from "react-router"
+import { QuizProvider, useQuizContext } from "./context/QuizContext"
+import { fetchQuestions } from "./services/quizService"
+import WelcomePage from "./components/WelcomePage"
+import QuizPage from "./components/QuizPage"
+import ResultsPage from "./components/ResultsPage"
 
-function App() {
-  const [count, setCount] = useState(0)
+const AppContent = () => {
+  const { setQuestions } = useQuizContext()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadQuestions = async () => {
+      try {
+        const fetchedQuestions = await fetchQuestions()
+        setQuestions(fetchedQuestions)
+        setLoading(false)
+      } catch (error) {
+        console.error("Failed to load questions:", error)
+        setLoading(false)
+      }
+    }
+
+    loadQuestions()
+  }, [setQuestions])
+
+  if (loading) {
+    return <div className="container">Loading...</div>
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Routes>
+      <Route path="/" element={<WelcomePage />} />
+      <Route path="/quiz/:questionId" element={<QuizPage />} />
+      <Route path="/results" element={<ResultsPage />} />
+    </Routes>
+  )
+}
+
+const App = () => {
+  return (
+    <Router>
+      <QuizProvider>
+        <AppContent />
+      </QuizProvider>
+    </Router>
   )
 }
 
