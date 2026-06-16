@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react"
+import { createContext, useState, useContext, useCallback } from "react"
 import PropTypes from "prop-types"
 
 const QuizContext = createContext()
@@ -7,6 +7,11 @@ export const QuizProvider = ({ children }) => {
   const [questions, setQuestions] = useState([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [userAnswers, setUserAnswers] = useState([])
+
+  const resetQuiz = useCallback(() => {
+    setCurrentQuestionIndex(0)
+    setUserAnswers([])
+  }, [])
 
   return (
     <QuizContext.Provider
@@ -17,6 +22,7 @@ export const QuizProvider = ({ children }) => {
         setCurrentQuestionIndex,
         userAnswers,
         setUserAnswers,
+        resetQuiz,
       }}
     >
       {children}
@@ -35,4 +41,3 @@ export const useQuizContext = () => {
   }
   return context
 }
-
